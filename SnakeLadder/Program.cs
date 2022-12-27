@@ -18,14 +18,14 @@ namespace SnakeLadder
         }
         public static int GameBoardAndPosition()
         {
-            int position = 0;
+            int position = 0, incrementingDice = 0;
             Random random = new Random();
             int diceOutput = SnakeLadder.DiceThrown();
 
             while (position >= 0 && position < 100)
             {
-                SnakeLadder invokingConstructor = new SnakeLadder();
                 int checksNewPosition = random.Next(3);
+                incrementingDice++;
                 switch (checksNewPosition)
                 {
                     case 0:
@@ -39,9 +39,9 @@ namespace SnakeLadder
                     case 1:
                         Console.WriteLine("Snake");
                         position = position - diceOutput;
-                        if (position < 0)      //if player moves below 0 then will take it back to its previous position (UC4)
+                        if (position < 0)      //if player moves below 0 then will take it will set position to 0).
                         {
-                            position = position + diceOutput;
+                            position = 0;
                         }
                         break;
                     default:
@@ -50,12 +50,13 @@ namespace SnakeLadder
                 }
                 Console.WriteLine("Position :" + position);
             }
+            Console.WriteLine($"Dice rolled {incrementingDice} times");
             return position;
         }
         static void Main(string[] args)
         {
             WelcomeMsg();
-            Console.WriteLine("Position :" + GameBoardAndPosition());
+            Console.WriteLine("Done! Reached Position :" + GameBoardAndPosition());
         }
     }
 }
